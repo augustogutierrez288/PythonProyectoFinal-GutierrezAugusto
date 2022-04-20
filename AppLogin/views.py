@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login as django_login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
 def IniciarSesion(request):
@@ -14,14 +14,14 @@ def IniciarSesion(request):
             user = authenticate(usuario=usuario, contraseña=contraseña)
             
             if user is not None:
-                login(request,user)
-                
-                return render(request, 'indice1/index.html', {})
+                django_login(request,user)    
+                return render(request, 'indice1/index.html', {'msj': 'Te logueaste Exitosamente:)'})
             else:
                 return render(request, 'indice2/login.html', {'form': form, 'msj': 'Formulario Incorrecto'})
             
         else:
             return render(request, 'indice2/login.html', {'form': form, 'msj': 'Usuario Incorrecto'})
-        
-    form = AuthenticationForm()
-    return render(request, 'indice2/login.html', {'form': form, 'msj': ''})
+    else:
+        form = AuthenticationForm()
+        return render(request, 'indice2/login.html', {'form': form, 'msj': ''})     
+    
