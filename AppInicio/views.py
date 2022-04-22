@@ -5,8 +5,5 @@ from django.shortcuts import render
 def inicio(request):
     return render(request,'indice1/index.html', {})
 
-def blog(request):
+def SobreNosotros(request):
     return HttpResponse('Blog')
-
-def proyectos(request):
-    return HttpResponse('Proyectos que nuestros Alumnos Crearon')

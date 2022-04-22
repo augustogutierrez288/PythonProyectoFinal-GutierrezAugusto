@@ -14,10 +14,11 @@
         <nav class="navbar navbar-light bg-light static-top"  
             <div class="container">
                 <li class="nav-item"><a class="nav-link" href={% url 'Inicio' %}>Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href={% url 'Blog' %}>Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href={% url 'Proyectos' %}>Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href={% url 'Sobre Nosotros' %}>Sobre Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href={% url 'Registrar' %}>Registrar</a></li>
                 <li class="nav-item"><a class="nav-link" href={% url 'Iniciar Sesion' %}>Iniciar Sesión</a></li>
                 <li class="nav-item"><a class="nav-link" href={% url 'Cerrar Sesion' %}>Cerrar Sesión</a></li>
+
             </div>
         </nav>
         {% block Formulario %}
@@ -32,33 +33,15 @@
                         <div class="text-center text-white">
                             <!-- Page heading-->
                             <h1 class="mb-5">
+                            
                                 {% if msj %}
                                     {{msj}}
                                 {% else %}
                                     ¡Comenza tu Desarrollo hacia el Futuro!
                                 {% endif %}
+                            
                             </h1>
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <!-- Email address input-->
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Correo Electronico" data-sb-validations="required,email" />
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Se requiere Dirección de correo electrónico.</div>
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Dirección de correo electrónico El correo electrónico no es válido.</div>
-                                    </div>
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Enviar</button></div>
-                                </div>
-                                <!-- Submit success message-->
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Envío de formulario exitosa!</div>
-                                    <p>Para activar este formulario, regístrate en</p>
-                                    <a class="text-white" href={% url 'Iniciar Sesion' %}>Crear Cuenta</a>
-                                    </div>
-                                </div>
-                                <!-- Submit error message-->
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            </form>
+                        
                         </div>
                     </div>
                 </div>
