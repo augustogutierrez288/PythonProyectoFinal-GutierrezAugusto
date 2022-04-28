@@ -14,10 +14,14 @@
         <nav class="navbar navbar-light bg-light static-top"  
             <div class="container">
                 <li class="nav-item"><a class="nav-link" href={% url 'Inicio' %}>Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href={% url 'Blog' %}>Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href={% url 'Proyectos' %}>Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href={% url 'Sobre Nosotros' %}>Sobre Nosotros</a></li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href={% url 'Editar Usuario' %}>Editar Usuario</a></li>
+                    <li class="nav-item"><a class="nav-link" href={% url 'Cerrar Sesion' %}>Cerrar Sesión</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href={% url 'Registrar' %}>Registrar</a></li>
                 <li class="nav-item"><a class="nav-link" href={% url 'Iniciar Sesion' %}>Iniciar Sesión</a></li>
-                <li class="nav-item"><a class="nav-link" href={% url 'Cerrar Sesion' %}>Cerrar Sesión</a></li>
+                {% endif %}  
             </div>
         </nav>
         <!-- Masthead-->

@@ -15,10 +15,15 @@
             <div class="container">
                 <li class="nav-item"><a class="nav-link" href={% url 'Inicio' %}>Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href={% url 'Sobre Nosotros' %}>Sobre Nosotros</a></li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href={% url 'Editar Usuario' %}>
+                        <img src="{{user_avatar_url}}" alt= 'Editar Imagen' height='40'
+                    </a></li>
+                    <li class="nav-item"><a class="nav-link" href={% url 'Cerrar Sesion' %}>Cerrar Sesión</a></li>
+                {% else %}
                 <li class="nav-item"><a class="nav-link" href={% url 'Registrar' %}>Registrar</a></li>
                 <li class="nav-item"><a class="nav-link" href={% url 'Iniciar Sesion' %}>Iniciar Sesión</a></li>
-                <li class="nav-item"><a class="nav-link" href={% url 'Cerrar Sesion' %}>Cerrar Sesión</a></li>
-
+                {% endif %}    
             </div>
         </nav>
         {% block Formulario %}
@@ -126,7 +131,7 @@
                                 <div class="text-center mb-3">
                                     <div class="fw-bolder">Envío de formulario exitosa!</div>
                                     <p>Para activar este formulario, regístrate en</p>
-                                    <a class="text-white" href={% url 'Iniciar Sesion' %}>Crear Cuenta</a>
+                                    <a class="text-white" href={% url 'Registrar' %}>Crear Cuenta</a>
                                 </div>
                             </div>
                             <!-- Submit error message-->
