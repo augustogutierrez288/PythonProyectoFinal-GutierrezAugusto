@@ -16,9 +16,7 @@
                 <li class="nav-item"><a class="nav-link" href={% url 'Inicio' %}>Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href={% url 'Sobre Nosotros' %}>Sobre Nosotros</a></li>
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href={% url 'Editar Usuario' %}>
-                        <img src="{{user_avatar_url}}" alt= 'Editar Imagen' height='40'
-                    </a></li>
+                    <li class="nav-item"><a class="nav-link" href={% url 'Editar Usuario' %}>Editar Usuario</a></li>
                     <li class="nav-item"><a class="nav-link" href={% url 'Cerrar Sesion' %}>Cerrar Sesión</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href={% url 'Registrar' %}>Registrar</a></li>
@@ -151,7 +149,7 @@
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">Sobre Nosotros</a></li>
+                            <li class="list-inline-item"><a href={% url 'Sobre Nosotros' %}>Sobre Nosotros</a></li>
                             <li class="list-inline-item">⋅</li>
                             <li class="list-inline-item"><a href="#!">Contacto</a></li>
                             <li class="list-inline-item">⋅</li>

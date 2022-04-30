@@ -1,4 +1,4 @@
-from .models import Avatar
+from .models import UserExtension
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -19,15 +19,15 @@ def IniciarSesion(request):
             
             if user is not None:
                 django_login(request,user)    
-                return render(request, 'indice1/index.html', {'msj': 'Bienvenido a Everest:)','user_avatar_url':buscarAvatarUrl(request.user)})
+                return render(request, 'indice1/index.html', {'msj': 'Bienvenido a Everest:)'})
             else:
-                return render(request, 'indice2/login.html', {'form': form, 'msj': 'Formulario Incorrecto'})
+                return render(request, 'accounts/login.html', {'form': form, 'msj': 'Formulario Incorrecto'})
             
         else:
-            return render(request, 'indice2/login.html', {'form': form, 'msj': 'Usuario Incorrecto'})
+            return render(request, 'accounts/login.html', {'form': form, 'msj': 'Usuario Incorrecto'})
     else:
         form = AuthenticationForm()
-        return render(request, 'indice2/login.html', {'form': form, 'msj': ''})  
+        return render(request, 'accounts/login.html', {'form': form, 'msj': ''})  
    
 def Registrar(request):
     if request.method == 'POST':
@@ -38,44 +38,48 @@ def Registrar(request):
             form.save()
             return render(request,'indice1/index.html', {'msj': f'Se Creo el usuario: {username}'})
         else:
-            return render(request, 'indice2/Registrar.html', {'form': form, 'msj': ''})
+            return render(request, 'accounts/Registrar.html', {'form': form, 'msj': ''})
         
     form = NuestraCreacionUser()
-    return render(request, 'indice2/Registrar.html', {'form': form, 'msj': ''})
+    return render(request, 'accounts/Registrar.html', {'form': form, 'msj': ''})
 
 @login_required
 def EditarUser(request):
-    msj = ''
+    
+    user_extension_logued, _ = UserExtension.objects.get_or_create(user=request.user)
+    
     if request.method == 'POST':
-        form = NuestraEdicionUser(request.POST)
+        form = NuestraEdicionUser(request.POST, request.FILES)
         
         if form.is_valid():
-            data = form.cleaned_data
-            request.user
-            request.user.Email = data.get('Email')
-            request.user.firstName = data.get('firstName','')
-            request.user.lastName = data.get('lastName','')
             
-            if data.get('password1') == data.get('password2') and len(data.get('password1')) > 8:
-                request.user.set_password(data.get('password1')) 
-            else:
-                msj = 'No se Modifico la Contraseña'
+            request.user.email = form.cleaned_data['email']
+            request.user.firstName = form.cleaned_data['firstName']
+            request.user.lastName= form.cleaned_data['lastName']
+            user_extension_logued.avatar = form.cleaned_data['avatar']
+            user_extension_logued.link = form.cleaned_data['link']
+            user_extension_logued.more_description = form.cleaned_data['more_description']
             
-            request.user.save()  
+            if form.cleaned_data('password1') != '' and form.cleaned_data['password1'] == form.cleaned_data['password2']:
+                request.user.set_password(form.cleaned_data['password1'])
+            
+            request.user.save()
+            user_extension_logued.save()
                      
-            return render(request,'indice1/index.html', {'msj': msj, 'user_avatar_url':buscarAvatarUrl(request.user)})
+            return render(request,'indice1/index.html', {'msj': msj})
         else:
-            return render(request, 'indice2/editarUser.html', {'form': form, 'msj': '','user_avatar_url':buscarAvatarUrl(request.user)})
+            return render(request, 'accounts/editarUser.html', {'form': form, 'msj': ''})
         
     form = NuestraEdicionUser(
         initial={
-            'firstName': request.user.firstName, #profesor tengo un error en esta linea de codigo y no lo puedo solucionar.
+            'Email': request.user.email,
+            'password1': '',
+            'password2': '', 
+            'firstName': request.user.firstName, #Hola Profesor no logro encontrar el error
             'lastName': request.user.lastName,
-            'Email': request.user.Email,
-            'userName': request.user.username
-        } 
+            'link':user_extension_logued.link,
+            'more_description': user_extension_logued.more_description,
+            'avatar':user_extension_logued.avatar,
+        }
     )
-    return render(request, 'indice2/editarUser.html', {'form': form, 'msj': '', 'user_avatar_url':buscarAvatarUrl(request.user)})  
-
-def buscarAvatarUrl(user):
-    return Avatar.objects.filter(user=user)[0].imagen.url
+    return render(request, 'accounts/editarUser.html', {'form': form, 'msj': ''})

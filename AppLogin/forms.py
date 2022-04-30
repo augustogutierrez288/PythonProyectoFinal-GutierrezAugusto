@@ -1,5 +1,3 @@
-from pyexpat import model
-import django
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -15,8 +13,11 @@ class NuestraCreacionUser(UserCreationForm):
         help_texts = {k : '' for k in fields}
 
 class NuestraEdicionUser(forms.Form):
-    Email = forms.EmailField()
-    password1 = forms.CharField(label='Contraseña')
-    password2 = forms.CharField(label='Repetir Contraseña')
-    firstName = forms.CharField(label='Nombre', required=False)
-    lastName = forms.CharField(label='Apellido', required=False)
+    email = forms.EmailField()
+    password1 = forms.CharField(label='Contraseña',widget=forms.PasswordInput, required=False)
+    password2 = forms.CharField(label='Repetir Contraseña',widget=forms.PasswordInput, required=False)
+    firstName = forms.CharField(label='Nombre')
+    lastName = forms.CharField(label='Apellido')
+    link = forms.URLField(required=False)
+    more_description = forms.CharField(max_length=300,required=False)
+    avatar = forms.ImageField(required=False)
