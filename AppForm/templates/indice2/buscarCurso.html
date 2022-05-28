@@ -1,0 +1,39 @@
+{% extends 'indice1/index.html' %}
+
+{% block Formulario %} 
+
+<h1>
+  Buscar un curso:
+</h1>
+
+{% if  buscador.errors %}  
+<p style="color: red,"> Estan mal los datos, Revisar</p>
+{% endif %}
+
+  <form action="" method="GET"> 
+
+      {% csrf_token %}
+
+      <table>
+          {{ buscador.as_table}}
+      </table>
+      
+      <input type="submit" value="Buscar">
+  </form>
+  
+{% if dato %}
+    se encontro por el {{dato}}:
+    {% for curso in cursos_buscados %}
+    <li>
+        {{curso}}
+    </li>
+    {% endfor %}
+{% else %}
+    no se encontro nada...
+{% endif %}
+
+{% endblock Formulario %}
+
+
+{% block Vacio %}
+{% endblock Vacio %}

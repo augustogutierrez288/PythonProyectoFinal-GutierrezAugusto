@@ -16,6 +16,8 @@
                 <li class="nav-item"><a class="nav-link" href={% url 'Inicio' %}>Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href={% url 'Sobre Nosotros' %}>Sobre Nosotros</a></li>
                 {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href={% url 'formularios' %}>Formularios</a></li>
+                    <li class="nav-item"><a class="nav-link" href={% url 'buscador' %}>Buscador</a></li>
                     <li class="nav-item"><a class="nav-link" href={% url 'Editar Usuario' %}>Editar Usuario</a></li>
                     <li class="nav-item"><a class="nav-link" href={% url 'Cerrar Sesion' %}>Cerrar Sesión</a></li>
                 {% else %}

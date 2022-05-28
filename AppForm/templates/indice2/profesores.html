@@ -1,0 +1,28 @@
+{% extends 'indice1/index.html' %}
+
+{% block Formulario %}   
+
+<a href= {% url 'profesorList' %} >Volver</a>
+
+<h3>
+  Agregar un profesor
+</h3>
+
+{% if formulario_profesor.errors %}  
+<p style="color: red,"> Estan mal los datos, Revisar</p>
+{% endif %}
+
+  <form action="" method="POST"> 
+
+      {% csrf_token %}
+      <table>
+          {{formulario_profesor.as_table}}
+      </table>
+      
+      <input type="submit" value="Agregar">
+  </form>
+{% endblock Formulario %}
+
+
+{% block Vacio %}
+{% endblock Vacio %}

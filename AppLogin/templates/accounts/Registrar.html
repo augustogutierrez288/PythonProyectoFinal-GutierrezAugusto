@@ -4,10 +4,10 @@
     {% if msj %}
         {{msj}}
         {% endif %}
-    <form action='' method='post'>
+    <form action='' method="POST">
         {% csrf_token %}
         {{form.as_p}}
-    <button>Crear Cuenta</button>
+    <button>Crear Usuario</button>
 {% endblock Formulario %}
 
 {% block Vacio %}

@@ -1,0 +1,16 @@
+{% extends 'indice1/index.html' %}
+
+{% block Formulario %}   
+<h3>
+  Editar un datos
+</h3>
+  <form  method="POST"> 
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" value="Guardar">
+  </form>
+{% endblock Formulario %}
+
+
+{% block Vacio %}
+{% endblock Vacio %}

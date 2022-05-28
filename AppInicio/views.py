@@ -5,3 +5,4 @@ def inicio(request):
 
 def SobreNosotros(request):
     return render(request,'indice1/sobreNosotros.html', {})
+       

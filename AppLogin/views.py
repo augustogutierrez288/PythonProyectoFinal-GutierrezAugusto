@@ -24,7 +24,7 @@ def IniciarSesion(request):
                 return render(request, 'accounts/login.html', {'form': form, 'msj': 'Formulario Incorrecto'})
             
         else:
-            return render(request, 'accounts/login.html', {'form': form, 'msj': 'Usuario Incorrecto'})
+            return render(request, 'accounts/login.html', {'form': form, 'msj': 'El Usuario no Existe'})
     else:
         form = AuthenticationForm()
         return render(request, 'accounts/login.html', {'form': form, 'msj': ''})  
@@ -54,29 +54,29 @@ def EditarUser(request):
         if form.is_valid():
             
             request.user.email = form.cleaned_data['email']
-            request.user.firstName = form.cleaned_data['firstName']
-            request.user.lastName= form.cleaned_data['lastName']
+            request.user.first_name = form.cleaned_data['first_name']
+            request.user.last_name= form.cleaned_data['last_name']
             user_extension_logued.avatar = form.cleaned_data['avatar']
             user_extension_logued.link = form.cleaned_data['link']
             user_extension_logued.more_description = form.cleaned_data['more_description']
             
-            if form.cleaned_data('password1') != '' and form.cleaned_data['password1'] == form.cleaned_data['password2']:
+            if form.cleaned_data['password1']!= '' and form.cleaned_data['password1'] == form.cleaned_data['password2']:
                 request.user.set_password(form.cleaned_data['password1'])
             
             request.user.save()
             user_extension_logued.save()
                      
-            return render(request,'indice1/index.html', {'msj': msj})
+            return render(request,'indice1/index.html', {'msj': ''})
         else:
             return render(request, 'accounts/editarUser.html', {'form': form, 'msj': ''})
         
     form = NuestraEdicionUser(
         initial={
-            'Email': request.user.email,
+            'email': request.user.email,
             'password1': '',
             'password2': '', 
-            'firstName': request.user.firstName, #Hola Profesor no logro encontrar el error
-            'lastName': request.user.lastName,
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
             'link':user_extension_logued.link,
             'more_description': user_extension_logued.more_description,
             'avatar':user_extension_logued.avatar,

@@ -1,0 +1,11 @@
+{% extends 'indice1/index.html' %}
+{% block Formulario %}
+<form method= "POST">
+    {% csrf_token %}
+    ¿Desea Borrar este Profesor de la Lista?
+    <input type="submit" placeholder="Borrar">
+</form>
+{% endblock Formulario %}
+
+{% block Vacio %}
+{% endblock Vacio %}

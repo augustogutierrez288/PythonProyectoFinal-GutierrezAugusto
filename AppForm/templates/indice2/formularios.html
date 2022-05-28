@@ -1,0 +1,19 @@
+{% extends 'indice1/index.html' %}
+
+
+
+{% block Formulario %}
+<h3>
+    Formularios:
+</h3>
+
+<table>
+    <button> <a class="text-black" href={% url 'curso_formulario' %}>Eormulario Cursos</a></button>
+    <button> <a class="text-black" href={% url 'profesorList' %}>Formularios Profesores</a></button>
+    <button> <a class="text-black" href={% url 'estudiantesList' %}>Formularios Alumnos</a></button>
+    <button> <a class="text-black" href={% url 'entregables' %}>Formularios Entregables</a></button>
+</table>
+{% endblock Formulario %}
+
+{% block Vacio %}
+{% endblock Vacio %}

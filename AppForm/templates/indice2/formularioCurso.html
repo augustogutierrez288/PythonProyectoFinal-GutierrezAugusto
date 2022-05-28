@@ -1,0 +1,26 @@
+{% extends 'indice1/index.html' %}
+
+{% block Formulario %} 
+
+</h3>
+  Agregar un curso
+</h3>
+
+{% if formulario.errors %}  
+<p style="color: red,"> Estan mal los datos, Revisar</p>
+{% endif %}
+
+  <form action="" method="POST"> 
+
+      {% csrf_token %}
+      <table>
+          {{formulario.as_table}}
+      </table>
+      
+      <input type="submit" value="Agregar">
+  </form>
+{% endblock Formulario %}
+
+
+{% block Vacio %}
+{% endblock Vacio %}

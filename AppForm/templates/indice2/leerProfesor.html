@@ -1,0 +1,27 @@
+{% extends 'indice1/index.html' %}
+
+{% block Formulario %}   
+<h3>
+  Lista de Profesores
+</h3>
+
+  <form action="" method="POST"> 
+<ul>
+    {% for profesores in object_list %}
+        <li>
+            <p> PROFESOR: {{profesores}} </p>
+            <p>
+                <a href= {% url 'profesorEditar' profesores.id %} >Editar</a>
+                <a href= {% url 'profesorBorrar' profesores.id %} >Borrar</a>
+            </p>
+
+        </li>
+    {% endfor %}
+</ul>
+  </form>
+  <button> <a class="text-black" href={% url 'profesoresCrear' %}>Crear Nuevo Profesor</a></button
+{% endblock Formulario %}
+
+
+{% block Vacio %}
+{% endblock Vacio %}

@@ -1,0 +1,14 @@
+{% extends 'indice1/index.html' %}
+
+{% block Formulario %}
+<h1>
+    Formularios de Busqueda:
+</h1>
+
+<table>
+    <button> <a class="text-black" href={% url 'buscadorCurso' %}>Buscar Cursos</a></button>
+</table>
+{% endblock Formulario %}
+
+{% block Vacio %}
+{% endblock Vacio %}
